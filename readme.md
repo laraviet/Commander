@@ -8,7 +8,7 @@ Per usual, install Commander through Composer.
 
 ```js
 "require": {
-    "laracasts/commander": "~1.0"
+    "laraviet/commander": "~2.*"
 }
 ```
 
@@ -90,15 +90,10 @@ Here's what that command might look like:
 ```php
 <?php namespace Acme\Jobs;
 
-class PostJobListingCommand {
+use Laracasts\Commander\Laraviet\BaseArrayCommand;
 
-    public $data;
-
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
-
+class PostJobListingCommand extends BaseArrayCommand 
+{
 }
 ```
 
@@ -344,24 +339,10 @@ When you add the `--properties` flag, the handle class will remain the same, how
 ```php
 <?php namespace Acme\Bar;
 
-class SubscribeUserCommand {
+use Laracasts\Commander\Laraviet\BaseArrayCommand;
 
-    /**
-     * @var string
-     */
-    public $data;
-
-    /**
-     * Constructor
-     *
-     * @param string first
-     * @param string last
-     */
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
-
+class SubscribeUserCommand extends BaseArrayCommand
+{
 }
 ```
 
