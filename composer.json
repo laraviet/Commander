@@ -1,11 +1,11 @@
 {
-    "name": "laracasts/commander",
+    "name": "laraviet/commander",
     "description": "Commands and domain events in Laravel",
     "license": "MIT",
     "authors": [
         {
-            "name": "Jeffrey Way",
-            "email": "jeffrey@laracasts.com"
+            "name": "Nguyen Trung Thanh",
+            "email": "thanhnt@nadia.bz"
         }
     ],
     "require": {
