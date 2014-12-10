@@ -17,6 +17,7 @@ trait CommanderTrait {
     protected function execute($command, array $input = null, $decorators = [])
     {
         $input = $input ?: Input::all();
+        $input = array_except($input, ['_token', 'q']);
 
         $command = $this->mapInputToCommand($command, $input);
 
@@ -54,29 +55,7 @@ trait CommanderTrait {
      */
     protected function mapInputToCommand($command, array $input)
     {
-        $dependencies = [];
-
-        $class = new ReflectionClass($command);
-
-        foreach ($class->getConstructor()->getParameters() as $parameter)
-        {
-            $name = $parameter->getName();
-
-            if (array_key_exists($name, $input))
-            {
-                $dependencies[] = $input[$name];
-            }
-            elseif ($parameter->isDefaultValueAvailable())
-            {
-                $dependencies[] = $parameter->getDefaultValue();
-            }
-            else
-            {
-                throw new InvalidArgumentException("Unable to map input to command: {$name}");
-            }
-        }
-
-        return $class->newInstanceArgs($dependencies);
+        return new $command($input);
     }
 
 }

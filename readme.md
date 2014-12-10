@@ -92,14 +92,11 @@ Here's what that command might look like:
 
 class PostJobListingCommand {
 
-    public $title;
+    public $data;
 
-    public $description;
-
-    public function __construct($title, $description)
+    public function __construct($data)
     {
-        $this->title = $title;
-        $this->description = $description;
+        $this->data = $data;
     }
 
 }
@@ -161,7 +158,7 @@ class PostJobListingCommandHandler implements CommandHandler {
 
     public function handle($command)
     {
-        $job = Job::post($command->title, $command->description);
+        $job = Job::post($command->$data);
 
         $this->dispatchEventsFor($job);
 
@@ -190,10 +187,10 @@ class Job extends \Eloquent {
 
     protected $fillable = ['title', 'description'];
 
-    public static function post($title, $description)
+    public static function post($data)
     {
-        // We're ignoring persistence for this demo
-        $job = new static(compact('title', 'description'));
+        // Persistence data
+        $job = new static::create($data);
 
         $job->raise(new JobWasPublished($job));
 
@@ -352,12 +349,7 @@ class SubscribeUserCommand {
     /**
      * @var string
      */
-    public $first;
-
-    /**
-     * @var string
-     */
-    public $last;
+    public $data;
 
     /**
      * Constructor
@@ -365,10 +357,9 @@ class SubscribeUserCommand {
      * @param string first
      * @param string last
      */
-    public function __construct($first, $last)
+    public function __construct($data)
     {
-        $this->first = $first;
-        $this->last = $last;
+        $this->data = $data;
     }
 
 }
