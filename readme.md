@@ -190,7 +190,7 @@ class Job extends \Eloquent {
     public static function post($data)
     {
         // Persistence data
-        $job = new static::create($data);
+        $job = static::create($data);
 
         $job->raise(new JobWasPublished($job));
 
