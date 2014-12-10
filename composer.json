@@ -12,7 +12,7 @@
         "php": ">=5.4.0",
         "illuminate/support": "~4.2",
         "illuminate/filesystem": "~4.2",
-        "mustache/mustache": "~2.4.*"
+        "mustache/mustache": "~2.4"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0.0",
